@@ -5,13 +5,11 @@ import { toBengaliNumber } from "@/lib/helpers";
 export default async function ProductSections() {
   const products = await getProducts();
 
-  // দাম বেড়েছে: শুধু "up" গুলো, বেশি % আগে
   const risers = products
     .filter((product) => product.change.dir === "up")
     .sort((a, b) => b.change.pct - a.change.pct)
     .slice(0, 6);
 
-  // দাম কমেছে: শুধু "down" গুলো, বেশি % আগে
   const fallers = products
     .filter((product) => product.change.dir === "down")
     .sort((a, b) => b.change.pct - a.change.pct)

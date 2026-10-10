@@ -6,7 +6,6 @@ export default function Hero() {
   return (
     <section className="max-w-6xl mx-auto px-4 pt-5 pb-6">
       <div className="bg-[#f9fcfa] border border-[#dfe8e1] rounded-[22px] px-5 py-6 sm:px-8 sm:py-8 flex flex-col-reverse sm:flex-row items-center justify-between gap-6 sm:gap-8">
-        {/* বাম পাশে লেখা */}
         <div className="w-full sm:flex-1">
           <p className="inline-block bg-[#e0f3e7] text-[#07833e] text-xs font-medium px-3 py-1 rounded-full mb-3">
             <TodayDate />
@@ -31,7 +30,6 @@ export default function Hero() {
           </Link>
         </div>
 
-        {/* ডান পাশে Banner Image */}
         <div className="w-full sm:w-[230px] md:w-[260px] flex justify-center shrink-0">
           <Image
             src={heroImage}

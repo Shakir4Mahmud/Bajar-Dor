@@ -154,7 +154,7 @@ export default function Navbar({ categories }) {
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-gray-200">
       <div className="max-w-6xl mx-auto px-4">
-        {/* প্রথম সারি: লোগো + সাইন ইন/আপ বাটন */}
+
         <div className="flex items-center justify-between gap-2 py-3">
           <Link href="/" className="flex items-center gap-3 min-w-0">
             <Image
@@ -180,7 +180,6 @@ export default function Navbar({ categories }) {
           {authSection}
         </div>
 
-         {/* দ্বিতীয় সারি: ক্যাটাগরি লিংক */}
         <nav className="flex flex-wrap items-center justify-start gap-1 pb-3">
           {categories.map((category) => {
             const active = isActive(category.slug);
