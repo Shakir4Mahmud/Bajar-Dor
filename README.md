@@ -49,7 +49,7 @@ For every product it shows today's price, the change from yesterday (▲ / ▼ /
 
 Product and category data come from a public REST API.
 
-**Base URL:** `https://api.api-store.workers.dev/api/bazardor`
+**Base URL:** `https://openapi.programming-hero.com/api/bazardor`
 
 | Method | Endpoint                          | Description                   |
 | ------ | --------------------------------- | ----------------------------- |
