@@ -3,6 +3,7 @@ import { Hind_Siliguri } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import NavbarLoader from "@/components/NavbarLoader";
 import PriceTicker from "@/components/PriceTicker";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const hindSiliguri = Hind_Siliguri({
@@ -18,7 +19,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="bn" data-theme="light">
-      <body className={hindSiliguri.className + " bg-[#eef4ef] min-h-screen"}>
+      <body
+        className={
+          hindSiliguri.className + " bg-[#eef4ef] min-h-screen flex flex-col"
+        }
+      >
         <Toaster />
 
         <Suspense
@@ -33,7 +38,9 @@ export default function RootLayout({ children }) {
           <PriceTicker />
         </Suspense>
 
-        {children}
+        <main className="flex-1">{children}</main>
+
+        <Footer />
       </body>
     </html>
   );
