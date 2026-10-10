@@ -2,7 +2,6 @@ import { betterAuth } from "better-auth";
 import { MongoClient } from "mongodb";
 import { mongodbAdapter } from "@better-auth/mongo-adapter";
 
-// dev mode e bar bar notun connection jate na hoy, tai ekta connection globalThis e rakhchi
 if (!globalThis.mongoClient) {
   globalThis.mongoClient = new MongoClient(process.env.BETTER_AUTH_DB_URL);
 }

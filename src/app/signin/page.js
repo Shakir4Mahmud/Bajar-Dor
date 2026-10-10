@@ -13,7 +13,6 @@ export default function SignInPage() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // login chhara protected page e gele ei toast dekhabe
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const reason = params.get("reason");
