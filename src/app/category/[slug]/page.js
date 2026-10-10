@@ -26,7 +26,6 @@ async function CategoryContent({ params }) {
   const categories = await getCategories();
   const category = categories.find((item) => item.slug === slug);
 
-  // ভুল slug হলে 404 page (সেখানে "হোম পেজে ফিরে যান" button আছে)
   if (!category) {
     notFound();
   }
@@ -36,7 +35,6 @@ async function CategoryContent({ params }) {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-6">
-      {/* শিরোনাম + icon */}
       <div className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl p-4 sm:p-5 flex items-center gap-4 mb-4">
         <div className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-2xl shrink-0">
           {category.icon}

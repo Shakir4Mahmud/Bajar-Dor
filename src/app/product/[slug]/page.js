@@ -9,7 +9,6 @@ import {
   formatPercent,
 } from "@/lib/helpers";
 
-// দশমিক থাকলে ২ ঘর পর্যন্ত দেখাবে (যেমন ৬১.৫০), না থাকলে সাধারণ সংখ্যা
 function formatPrice(number) {
   if (Number.isInteger(number)) {
     return toBengaliNumber(number);
@@ -33,12 +32,10 @@ async function ProductDetails({ params }) {
   const products = await getProducts();
   const product = products.find((item) => item.slug === slug);
 
-  // ভুল slug হলে 404 পেজ
   if (!product) {
     notFound();
   }
 
-  // সব বাজারের min / max / গড় হিসাব
   const markets = product.markets;
 
   const allMins = markets.map((m) => m.min);
@@ -54,7 +51,6 @@ async function ProductDetails({ params }) {
   }
   const averagePrice = total / allAverages.length;
 
-  // গতকালের সাথে তুলনা
   const difference = Math.abs(product.today - product.yesterday);
   let changeText = "গতকালের মতোই আছে";
   if (product.change.dir === "up") {
@@ -64,7 +60,6 @@ async function ProductDetails({ params }) {
     changeText = "কমেছে";
   }
 
-  // badge এর রং ও তীর
   let arrow = "—";
   let badgeClass = "text-gray-500";
   if (product.change.dir === "up") {
@@ -96,7 +91,6 @@ async function ProductDetails({ params }) {
         <span className="text-gray-700">{product.nameBn}</span>
       </nav>
 
-      {/* উপরের summary card */}
       <section className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-gray-100 flex items-center justify-center text-4xl shrink-0">
@@ -125,7 +119,6 @@ async function ProductDetails({ params }) {
         </div>
       </section>
 
-      {/* নিচের বড় card */}
       <section className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl p-4 sm:p-6">
         <h2 className="font-bold mb-3">দামের সারসংক্ষেপ</h2>
 

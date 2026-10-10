@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 
-// নাম আপডেটের ফর্ম
 function ProfileForm({ user }) {
   const router = useRouter();
   const [newName, setNewName] = useState(user.name);
@@ -72,7 +71,6 @@ export default function ProfilePage() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 
-  // সাইন ইন না থাকলে সাইন ইন পেজে পাঠিয়ে দেবে
   useEffect(() => {
     if (!isPending && !session) {
       toast.error("প্রোফাইল দেখতে আগে সাইন ইন করুন", { id: "login-required" });
@@ -87,7 +85,6 @@ export default function ProfilePage() {
     router.refresh();
   }
 
-  // ডাটা আসা পর্যন্ত স্কেলেটন
   if (isPending || !session) {
     return (
       <div className="max-w-xl mx-auto px-4 py-8">
@@ -130,7 +127,7 @@ export default function ProfilePage() {
       </div>
 
       <div className="flex flex-col gap-4">
-        {/* প্রোফাইল কার্ড */}
+        {/* pp card */}
         <div className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4 min-w-0">
             {avatar}
@@ -162,7 +159,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* নাম আপডেট ফর্ম */}
+        {/* name update form */}
         <ProfileForm user={user} />
       </div>
     </div>

@@ -8,11 +8,8 @@ import { toBengaliNumber } from "@/lib/helpers";
 export default function CategoryProducts({ products }) {
   const [sortType, setSortType] = useState("default");
 
-  // original array ke na bodle copy niye sort korbo
   const sortedProducts = [...products];
 
-  // product.today ekta English number, tai numeric value diye sort hobe
-  // (Bengali digit er string diye na), eta C1 er requirement
   if (sortType === "low") {
     sortedProducts.sort((a, b) => a.today - b.today);
   }
@@ -20,7 +17,6 @@ export default function CategoryProducts({ products }) {
     sortedProducts.sort((a, b) => b.today - a.today);
   }
 
-  // category te kono product na thakle
   if (products.length === 0) {
     return (
       <div className="text-center py-16">
@@ -38,7 +34,6 @@ export default function CategoryProducts({ products }) {
 
   return (
     <div>
-      {/* সাজান control */}
       <div className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl px-4 py-4 flex items-center justify-end gap-3 mb-4">
         <label htmlFor="sort" className="text-sm text-gray-600">
           সাজান
