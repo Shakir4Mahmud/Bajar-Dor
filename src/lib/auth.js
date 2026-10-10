@@ -11,6 +11,11 @@ const client = globalThis.mongoClient;
 const db = client.db();
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL,
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://bajar-dor-mauve.vercel.app",
+  ],
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
