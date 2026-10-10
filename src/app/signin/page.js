@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
@@ -12,6 +12,16 @@ export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // login chhara protected page e gele ei toast dekhabe
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const reason = params.get("reason");
+
+    if (reason === "login-required") {
+      toast.error("এই পেজ দেখতে আগে সাইন ইন করুন", { id: "login-required" });
+    }
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();

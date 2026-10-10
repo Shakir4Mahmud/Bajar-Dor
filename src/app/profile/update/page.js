@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 
-// নাম আপডেটের ফর্ম
 function UpdateForm({ user }) {
   const router = useRouter();
   const [newName, setNewName] = useState(user.name);
@@ -72,7 +71,6 @@ export default function UpdateProfilePage() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 
-  // সাইন ইন না থাকলে সাইন ইন পেজে পাঠিয়ে দেবে
   useEffect(() => {
     if (!isPending && !session) {
       toast.error("তথ্য আপডেট করতে আগে সাইন ইন করুন", { id: "login-required" });
