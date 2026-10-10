@@ -1,76 +1,16 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
-
-function ProfileForm({ user }) {
-  const router = useRouter();
-  const [newName, setNewName] = useState(user.name);
-  const [loading, setLoading] = useState(false);
-
-  async function handleUpdate(event) {
-    event.preventDefault();
-
-    const trimmedName = newName.trim();
-
-    if (trimmedName === "") {
-      toast.error("নাম খালি রাখা যাবে না");
-      return;
-    }
-    if (trimmedName === user.name) {
-      toast.error("নতুন কোনো নাম দেওয়া হয়নি");
-      return;
-    }
-
-    setLoading(true);
-    const { error } = await authClient.updateUser({
-      name: trimmedName,
-    });
-    setLoading(false);
-
-    if (error) {
-      toast.error("নাম আপডেট করা যায়নি, আবার চেষ্টা করুন");
-      return;
-    }
-
-    toast.success("নাম সফলভাবে আপডেট হয়েছে");
-    router.refresh();
-  }
-
-  return (
-    <div className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl p-4 sm:p-6">
-      <h2 className="font-semibold mb-4">তথ্য</h2>
-
-      <form onSubmit={handleUpdate} className="flex flex-col gap-4">
-        <div>
-          <label className="text-sm block mb-1">নাম</label>
-          <input
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            placeholder="আপনার নাম লিখুন"
-            className="input input-bordered w-full bg-white"
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="btn bg-green-700 hover:bg-green-800 text-white border-none shadow-md"
-        >
-          {loading ? "অপেক্ষা করুন..." : "আপডেট"}
-        </button>
-      </form>
-    </div>
-  );
-}
 
 export default function ProfilePage() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
 
+  // সাইন ইন না থাকলে সাইন ইন পেজে পাঠিয়ে দেবে
   useEffect(() => {
     if (!isPending && !session) {
       toast.error("প্রোফাইল দেখতে আগে সাইন ইন করুন", { id: "login-required" });
@@ -85,6 +25,7 @@ export default function ProfilePage() {
     router.refresh();
   }
 
+  // ডাটা আসা পর্যন্ত স্কেলেটন
   if (isPending || !session) {
     return (
       <div className="max-w-xl mx-auto px-4 py-8">
@@ -127,7 +68,7 @@ export default function ProfilePage() {
       </div>
 
       <div className="flex flex-col gap-4">
-        {/* pp card */}
+        {/* প্রোফাইল কার্ড */}
         <div className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-4 min-w-0">
             {avatar}
@@ -159,8 +100,29 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        {/* name update form */}
-        <ProfileForm user={user} />
+        {/* তথ্য কার্ড */}
+        <div className="bg-[#fafcfa] border border-[#e3ebe5] rounded-2xl p-4 sm:p-6">
+          <h2 className="font-semibold mb-4">তথ্য</h2>
+
+          <div className="flex flex-col gap-4">
+            <div>
+              <p className="text-sm text-gray-500">নাম</p>
+              <p className="font-medium">{user.name}</p>
+            </div>
+
+            <div>
+              <p className="text-sm text-gray-500">ইমেইল</p>
+              <p className="font-medium break-all">{user.email}</p>
+            </div>
+
+            <Link
+              href="/profile/update"
+              className="btn bg-green-700 hover:bg-green-800 text-white border-none shadow-md"
+            >
+              আপডেট
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
