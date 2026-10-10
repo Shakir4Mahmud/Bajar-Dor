@@ -180,16 +180,16 @@ export default function Navbar({ categories }) {
           {authSection}
         </div>
 
-        {/* দ্বিতীয় সারি: ক্যাটাগরি লিংক */}
-        <nav className="flex items-center gap-1 overflow-x-auto no-scrollbar pb-2 md:justify-items-start">
+         {/* দ্বিতীয় সারি: ক্যাটাগরি লিংক */}
+        <nav className="flex flex-wrap items-center justify-start gap-1 pb-3">
           {categories.map((category) => {
             const active = isActive(category.slug);
 
             let linkClass =
-              "flex items-center gap-1 px-3 py-1.5 rounded-full text-sm whitespace-nowrap hover:bg-green-50";
+              "flex items-center gap-1 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm whitespace-nowrap border border-transparent hover:bg-green-50";
             if (active) {
               linkClass =
-                "flex items-center gap-1 px-3 py-1.5 rounded-full text-sm whitespace-nowrap bg-green-100 text-green-800 font-semibold";
+                "flex items-center gap-1 px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs sm:text-sm whitespace-nowrap border border-green-300 bg-green-100 text-green-800 font-semibold";
             }
 
             return (
